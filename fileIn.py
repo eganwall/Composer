@@ -30,8 +30,7 @@ for gene in genes:
 	
 	time += duration
 	
-# this line just adds a third to the last chord for funsies
-#myMIDI.addNote(track, channel, pitch - 8, time - duration, duration, volume)
+print("The piece is %.1f beats long" % time) # make sure the length is correct
 
 # and then we write it to our output MIDI file	
 outFile = open("output.mid", 'wb')
