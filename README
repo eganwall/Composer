@@ -1,0 +1,1 @@
+Running fileOut.py will generate a random .in file that contains the genetic material for a sequence of notes. fileIn.py will use that file as input and create the .mid file, which then can be listened to.
