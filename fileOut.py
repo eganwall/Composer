@@ -9,6 +9,7 @@ outFile = file("music3.in", "w+")
 
 maxBeats = 320.0 # we'll generate an excerpt that's 8 measures of 4 beats each
 currBeats = 0.0 # and this will keep track of how many beats we've currently written
+prevPitch = 0 # this will keep track of the previous pitch so we can resolve 7ths
 
 # for now, the loop will go until the number of beats
 # in the entire excerpt is reached. The loop will
@@ -33,8 +34,15 @@ while currBeats < maxBeats:
 		noteTime = str(int(timeDict['whole'] * 10))
 
 	# now we'll select a random pitch from our key list
-	pitchNum = random.randrange(0, 15)
-	pitch = str(cMajorKey[pitchNum])
+	if prevPitch == "71":
+		pitch = "72"
+	elif prevPitch == "83":
+		pitch = "84"
+	else:
+		pitchNum = random.randrange(0, 15)
+		pitch = str(cMajorKey[pitchNum])
+	
+	prevPitch = pitch
 	
 	# this checks to see if the piece is finished and makes 
 	# sure we don't put too many beats in it
