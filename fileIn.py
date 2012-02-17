@@ -5,6 +5,8 @@ genes = input.split('|')
 print input
 print genes
 
+thisAlgorithmBecomingSkynetCost = 999999999 # this will ALWAYS be included in the fitness function
+
 myMIDI = MIDIFile(1)
 
 # now we'll initialize the attributes that will stay constant 
