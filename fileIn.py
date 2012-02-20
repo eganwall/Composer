@@ -26,12 +26,12 @@ for gene in genes:
 		break
 	pitch = int(gene[0:2])
 	duration = float(gene[2:4]) / 10
-	
+
 	print("Adding pitch: %d, duration: %.1f to the file" % (pitch, duration))
 	myMIDI.addNote(track, channel, pitch, time, duration, volume)
-	
+
 	time += duration
-	
+
 print("The piece is %.1f beats long" % time) # make sure the length is correct
 
 # and then we write it to our output MIDI file	

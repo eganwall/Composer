@@ -7,7 +7,7 @@ cMajorKey = [60, 62, 64, 65, 67, 69, 71, 72, 74, 76, 77, 79, 81, 83, 84] # 2 oct
 timeDict = {'eighth' : .5, 'quarter' : 1, 'half' : 2, 'whole' : 4}
 outFile = file("music3.in", "w+")
 
-maxBeats = 640.0 # we'll generate an excerpt that's 8 measures of 4 beats each
+maxBeats = 320.0 # we'll generate an excerpt that's 8 measures of 4 beats each
 currBeats = 0.0 # and this will keep track of how many beats we've currently written
 prevPitch = 0 # this will keep track of the previous pitch so we can resolve 7ths
 
@@ -21,7 +21,7 @@ while currBeats < maxBeats:
 	# for an eighth note, a 10% chance for a half note and a 5%
 	# chance for a whole note. I'm lazy right now and I'm just 
 	# going to hardcode this shit. FUCK WHAT YA HERD
-	
+
 	rand = random.random()
 
 	if rand <= 0.6:
@@ -33,28 +33,36 @@ while currBeats < maxBeats:
 	else:
 		noteTime = str(int(timeDict['whole'] * 10))
 
-	# now we'll select a random pitch from our key list
+	# now we'll check to see if the last pitch was a major 7th
 	if prevPitch == "71":
+		# if it is, we'll resolve it up to the root note
 		pitch = "72"
 	elif prevPitch == "83":
 		pitch = "84"
 	else:
+		# if it's not, we'll give it a random pitch from our key list
 		pitchNum = random.randrange(0, 15)
 		pitch = str(cMajorKey[pitchNum])
-	
+
 	prevPitch = pitch
-	
+
 	# this checks to see if the piece is finished and makes 
 	# sure we don't put too many beats in it
 	if (currBeats + float(noteTime)) > maxBeats:
-	
 		noteTime = str(int(maxBeats - currBeats))
+		# we have to make sure it writes the chromosome for the last
+		# eighth note correctly
+		if noteTime == "5":
+			noteTime = "05"
+	
+	# WHY THE FUCK DOESN'T THIS WORK?
+	if currBeats == maxBeats:
 		pitch = "60" # we'll also make the last note resolve
-		
+
 	currBeats += float(noteTime)
-	
+
 	gene = pitch + noteTime
-	
+
 	outFile.write(gene + "|")
 
 print("There we go, done!")
