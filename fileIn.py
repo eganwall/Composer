@@ -2,6 +2,7 @@ from midiutil.MidiFile import MIDIFile
 
 input = open('music3.in', 'r').read()
 genes = input.split('|')
+genes.remove('')
 print input
 print genes
 
