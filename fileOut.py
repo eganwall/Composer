@@ -25,13 +25,13 @@ while currBeats < maxBeats:
 	rand = random.random()
 
 	if rand <= 0.6:
-		noteTime = str(int(timeDict['quarter'] * 10))
+		noteTime = int(timeDict['quarter'] * 10)
 	elif rand > 0.6 and rand <=0.85:
-		noteTime = "0" + str(int(timeDict['eighth'] * 10))
+		noteTime = int(timeDict['eighth'] * 10)
 	elif rand > 0.85 and rand <= .95:
-		noteTime = str(int(timeDict['half'] * 10))
+		noteTime = int(timeDict['half'] * 10)
 	else:
-		noteTime = str(int(timeDict['whole'] * 10))
+		noteTime = int(timeDict['whole'] * 10)
 
 	# now we'll check to see if the last pitch was a major 7th
 	if prevPitch == "71":
@@ -45,21 +45,25 @@ while currBeats < maxBeats:
 		pitch = str(cMajorKey[pitchNum])
 
 	prevPitch = pitch
-
+	noteTime = str(noteTime)
 	# this checks to see if the piece is finished and makes 
 	# sure we don't put too many beats in it
-	if (currBeats + float(noteTime)) > maxBeats:
+	if (currBeats + float(noteTime)) >= maxBeats:
 		noteTime = str(int(maxBeats - currBeats))
-		# we have to make sure it writes the chromosome for the last
-		# eighth note correctly
-		if noteTime == "5":
-			noteTime = "05"
+		currBeats = maxBeats
 		
 		''' WHY THE FUCK DON'T YOU WORK?? 
 		Get your shit together. Don't make me get out of my chair.
 		I swear to God I will fuck you up. '''
-		pitch = "60" # we'll also make the last note resolve
+		if(currBeats == maxBeats):
+			pitch = "60" # we'll also make the last note resolve
 
+	
+	# we have to make sure it writes the chromosome for the 
+	# eighth note correctly
+	if noteTime == "5":
+		noteTime = "05"
+		
 	currBeats += float(noteTime)
 
 	gene = pitch + noteTime
