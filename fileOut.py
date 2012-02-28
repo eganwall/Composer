@@ -55,8 +55,7 @@ while currBeats < maxBeats:
 		''' WHY THE FUCK DON'T YOU WORK?? 
 		Get your shit together. Don't make me get out of my chair.
 		I swear to God I will fuck you up. '''
-		if(currBeats == maxBeats):
-			pitch = "60" # we'll also make the last note resolve
+		pitch = "60"
 
 	
 	# we have to make sure it writes the chromosome for the 
