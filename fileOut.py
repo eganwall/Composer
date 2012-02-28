@@ -5,7 +5,7 @@ import random
 
 cMajorKey = [60, 62, 64, 65, 67, 69, 71, 72, 74, 76, 77, 79, 81, 83, 84] # 2 octave C major
 timeDict = {'eighth' : .5, 'quarter' : 1, 'half' : 2, 'whole' : 4}
-outFile = file("music3.in", "w+")
+outFile = file("music3.dna", "w+")
 
 maxBeats = 320.0 # we'll generate an excerpt that's 8 measures of 4 beats each
 currBeats = 0.0 # and this will keep track of how many beats we've currently written

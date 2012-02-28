@@ -5,8 +5,6 @@
 	This module will be responsible for 
 	creating generation x by combining the 
 	DNA of two members of generation x-1.
-	It will also handle mutation of the 
-	new generation.
 
 '''''''''''''''''''''''''''''''''''''''''''''
 
@@ -14,8 +12,11 @@
 import random
 
 # first we'll bring in the two parents of the new generation
-parent1 = open('parent1.in', 'r').read()
-parent2 = open('parent2.in', 'r').read()
+parent1 = open('parent1.dna', 'r').read()
+parent2 = open('parent2.dna', 'r').read()
+
+# go ahead and initialize our output DNA file
+outFile = file('newGen.dna', 'w+')
 
 # clean them up a little bit so we can use them as lists
 parent1 = parent1.split('|')
@@ -29,16 +30,32 @@ parent2.remove('')
 # point. the latest crossover gene in the DNA will be the 
 # second-to-last one.
 if(len(parent1) < len(parent2)):
-	maxCrossover = len(parent1) - 1
+	maxCrossover = len(parent1) - 2 # we subtract 2 to ensure that at least 2 genes will always be passed from each parent
 else:
-	maxCrossover = len(parent2)
+	maxCrossover = len(parent2) - 2
 	
 # the crossover point will be a random point inside the bounds 
 # of the DNA of the shorter parent
-crossoverPoint = random.randrange(1,maxCrossover)
+crossoverPoint = random.randrange(2, maxCrossover)
 
+# random debugging shit
 print parent1
 print parent2
 print len(parent1)
 print len(parent2)
 print("The crossover point is %d." % crossoverPoint)
+
+# now we can go ahead and start the real work
+
+newGen = list()
+newGen.extend(parent1[0:crossoverPoint])
+print("After parent 1:")
+print newGen
+
+newGen.extend(parent2[crossoverPoint:len(parent2)])
+print("After parent 2:")
+print newGen
+
+# now we write our Adam into our new DNA file to start the new generation
+for gene in newGen:
+	outFile.write(gene + "|")

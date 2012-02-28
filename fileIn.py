@@ -1,6 +1,6 @@
 from midiutil.MidiFile import MIDIFile
 
-input = open('music3.in', 'r').read()
+input = open('newGen.dna', 'r').read()
 genes = input.split('|')
 genes.remove('')
 print input
