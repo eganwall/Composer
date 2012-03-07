@@ -18,6 +18,9 @@ parent2 = open('parent2.dna', 'r').read()
 # go ahead and initialize our output DNA file
 outFile = file('newGen.dna', 'w+')
 
+# initialize our duration counter
+totalDuration = 0
+
 # clean them up a little bit so we can use them as lists
 parent1 = parent1.split('|')
 parent2 = parent2.split('|')
@@ -55,6 +58,12 @@ print newGen
 newGen.extend(parent2[crossoverPoint:len(parent2)])
 print("After parent 2:")
 print newGen
+
+# we need to add up the total duration of the crossed-over piece
+for gene in newGen:
+	totalDuration += int(gene[2:3]) # this will get the 3rd and 4th chromosomes and cast to an int
+	
+print("The total duration of the piece is: %d." % totalDuration)	
 
 # now we write our Adam into our new DNA file to start the new generation
 for gene in newGen:
