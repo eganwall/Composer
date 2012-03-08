@@ -61,9 +61,24 @@ print newGen
 
 # we need to add up the total duration of the crossed-over piece
 for gene in newGen:
-	totalDuration += int(gene[2:3]) # this will get the 3rd and 4th chromosomes and cast to an int
+	totalDuration += float(gene[2:4]) # this will get the 3rd and 4th chromosomes and cast to an int
 	
-print("The total duration of the piece is: %d." % totalDuration)	
+totalDuration = totalDuration / 10
+print("The total duration of the piece is %.1f before cleanup." % totalDuration)	
+
+if totalDuration != 32.0: # since we're using 32 beats as our length already...
+	# keep a list of all of the values of all of the genes
+	noteDurations = list()
+	
+	# now we loop through and populate our list
+	for index, gene in enumerate(newGen):
+		currGene = newGen[index]
+		if currGene[2:4] == "05":
+			noteDurations.append(5)
+		else:
+			noteDurations.append(int(currGene[2:4]))
+		print(currGene[2:4])
+	print noteDurations
 
 # now we write our Adam into our new DNA file to start the new generation
 for gene in newGen:
