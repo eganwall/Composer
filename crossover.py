@@ -22,7 +22,7 @@ parent2 = open('parent2.dna', 'r').read()
 outFile = file('newGen.dna', 'w+')
 
 # initialize our duration counter
-totalDuration = 0
+totalDuration = 0.0
 
 # clean them up a little bit so we can use them as lists
 parent1 = parent1.split('|')
@@ -69,7 +69,7 @@ for gene in newGen:
 totalDuration = totalDuration / 10
 print("The total duration of the piece is %.1f before cleanup." % totalDuration)	
 
-if totalDuration != LENGTH
+if totalDuration != LENGTH:
 	# keep a list of all of the values of all of the genes
 	noteDurations = list()
 	
@@ -92,32 +92,51 @@ if totalDuration != LENGTH
 	print noteDurations
 	print notePitches
 
-''' 
+if noteDurations is not None: # lol
+	'''
 	Here is where we're going to assess how far off the mark
 	our piece is in terms of timing. Once we know how much 
 	editing we have to do, we'll loop through our time
 	list and add/subtract an eighth note from a random
 	index in the list.
-'''
-
+	'''
 	# this block determines whether we're going to add
 	# or subtract time from the piece
-	if totalDuration < LENGTH:
+	if(totalDuration < LENGTH):
 		direction = 1
-	elif totalDuration > LENGTH:
+	elif(totalDuration > LENGTH):
 		direction = -1
 		
 	# we'll loop through until the piece is the correct length
 	while totalDuration != LENGTH:
+		index = random.randrange(0, len(noteDurations)) # this is the note we'll modify
 		
+		# if it's already a whole note, we don't want to add anything
+		if(noteDurations[index] == 40 and direction == 1):
+			continue
+		# conversely, we can't subtract an eighth note from an eighth note
+		if(noteDurations[index] == 5 and direction == -1):
+			continue
+	
+		noteDurations[index] += direction * 5 # this will add or subtract an eighth note from the selected note
+		totalDuration += direction * .5 # and this allows us to keep track of it
+	
+		print("The note in index %d has been modified." % index)
+		print("The piece is now %.1f beats long." % totalDuration)
+	
+	print noteDurations
+
+	# the final step is to splice our arrays together to make the genetic material
+	for index in range(0, len(noteDurations)):
+		gene = str(notePitches[index])
 		
-	
-	
-	
-	
-	
-	
-	
+		if(noteDurations[index] == 5):
+			gene += "05"
+		else:
+			gene += str(noteDurations[index])
+		
+		newGen[index] = gene
+	print newGen
 
 # now we write our Adam into our new DNA file to start the new generation
 for gene in newGen:

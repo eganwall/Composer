@@ -51,10 +51,6 @@ while currBeats < maxBeats:
 	if (currBeats + float(noteTime)) >= maxBeats:
 		noteTime = str(int(maxBeats - currBeats))
 		currBeats = maxBeats
-		
-		''' WHY THE FUCK DON'T YOU WORK?? 
-		Get your shit together. Don't make me get out of my chair.
-		I swear to God I will fuck you up. '''
 		pitch = "60"
 
 	
