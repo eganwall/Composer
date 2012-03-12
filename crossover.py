@@ -11,6 +11,9 @@
 # this is going to help us choose our crossover point
 import random
 
+# this is our target length for the piece
+LENGTH = 32.0
+
 # first we'll bring in the two parents of the new generation
 parent1 = open('parent1.dna', 'r').read()
 parent2 = open('parent2.dna', 'r').read()
@@ -66,19 +69,55 @@ for gene in newGen:
 totalDuration = totalDuration / 10
 print("The total duration of the piece is %.1f before cleanup." % totalDuration)	
 
-if totalDuration != 32.0: # since we're using 32 beats as our length already...
+if totalDuration != LENGTH
 	# keep a list of all of the values of all of the genes
 	noteDurations = list()
 	
-	# now we loop through and populate our list
+	# and another list of the pitches, so at the end we can just splice them together
+	# (there may be a better way to do this, but I'll leave that for another day.)
+	notePitches = list()
+	
+	# now we loop through and populate our lists
 	for index, gene in enumerate(newGen):
 		currGene = newGen[index]
+		
+		notePitches.append(currGene[0:2]) # this will copy the pitch value into our first list
+		
+		# this little block copies our time value into the second list
 		if currGene[2:4] == "05":
 			noteDurations.append(5)
 		else:
 			noteDurations.append(int(currGene[2:4]))
 		print(currGene[2:4])
 	print noteDurations
+	print notePitches
+
+''' 
+	Here is where we're going to assess how far off the mark
+	our piece is in terms of timing. Once we know how much 
+	editing we have to do, we'll loop through our time
+	list and add/subtract an eighth note from a random
+	index in the list.
+'''
+
+	# this block determines whether we're going to add
+	# or subtract time from the piece
+	if totalDuration < LENGTH:
+		direction = 1
+	elif totalDuration > LENGTH:
+		direction = -1
+		
+	# we'll loop through until the piece is the correct length
+	while totalDuration != LENGTH:
+		
+		
+	
+	
+	
+	
+	
+	
+	
 
 # now we write our Adam into our new DNA file to start the new generation
 for gene in newGen:
