@@ -1,4 +1,10 @@
 from midiutil.MidiFile import MIDIFile
+import os # this will allow us to create the directory if it doesn't exist
+
+# which we'll do now...
+dir = "Outputs/"
+if not os.path.exists(dir):
+	os.makedirs(dir)
 
 m = 0 # our population counter
 
