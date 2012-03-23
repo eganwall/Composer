@@ -6,7 +6,7 @@ import random
 m = 0 # this is our population counter
 cMajorKey = [60, 62, 64, 65, 67, 69, 71, 72, 74, 76, 77, 79, 81, 83, 84] # 2 octave C major
 timeDict = {'eighth' : .5, 'quarter' : 1, 'half' : 2, 'whole' : 4}
-maxBeats = 320.0 # we'll generate an excerpt that's 8 measures of 4 beats each
+maxBeats = 480.0 # we'll generate an excerpt that's 8 measures of 4 beats each
 
 # now we'll loop through and generate a population
 while(m < 20):

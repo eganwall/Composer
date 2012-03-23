@@ -12,7 +12,7 @@
 import random
 
 # this is our target length for the piece
-LENGTH = 32.0
+LENGTH = 48.0
 
 # first we'll bring in the two parents of the new generation
 parent1 = open('parent1.dna', 'r').read()

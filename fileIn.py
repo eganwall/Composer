@@ -14,6 +14,7 @@ while(m < 20):
 	m = m + 1
 	
 	# change the files we're pointing to
+	#fileName = "template.dna"
 	fileName = "music" + str(m) + ".dna"
 	outName = "Outputs/output" + str(m) + ".mid"
 	
