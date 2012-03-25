@@ -15,7 +15,7 @@ import random
 LENGTH = 48.0
 
 # first we'll bring in the two parents of the new generation
-parent1 = open('parent1.dna', 'r').read()
+parent1 = open('template.dna', 'r').read()
 parent2 = open('parent2.dna', 'r').read()
 
 # go ahead and initialize our output DNA file
