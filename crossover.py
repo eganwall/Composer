@@ -11,12 +11,16 @@
 # this is going to help us choose our crossover point
 import random
 
+# first we'll pass it the two parents
+p1 = raw_input("Parent 1: ")
+p2 = raw_input("Parent 2: ")
+
 # this is our target length for the piece
 LENGTH = 48.0
 
 # first we'll bring in the two parents of the new generation
-parent1 = open('template.dna', 'r').read()
-parent2 = open('parent2.dna', 'r').read()
+parent1 = open('music' + p1 + '.dna', 'r').read()
+parent2 = open('music' + p2 + '.dna', 'r').read()
 
 # go ahead and initialize our output DNA file
 outFile = file('newGen.dna', 'w+')
