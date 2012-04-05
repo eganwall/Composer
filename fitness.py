@@ -69,12 +69,19 @@ finalistFits = list()
 i = 0
 
 while(i < 4):
-	i += 1
-	finalist = random.randrange(0, len(fitnesses))
+	finalist = random.randint(1, len(fitnesses))
 	
-	# we'll add the fitness and number of our finalist piece to the arrays
-	finalistFits.append(fitnesses[finalist])
-	finalistPieces.append(finalist)
+	print("Selecting finalist %d..." % finalist)
+	
+	# let's make sure we don't get any duplicates...
+	if finalist not in finalistPieces:
+		
+		# we'll add the fitness and number of our finalist piece to the arrays
+		finalistFits.append(fitnesses[finalist - 1])
+		finalistPieces.append(finalist)
+		
+		# and we can increment our counter
+		i = i + 1
 	
 print("The four finalists are:")
 print finalistPieces
