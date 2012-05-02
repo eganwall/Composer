@@ -10,8 +10,8 @@ import random
 # our population counter
 m = 0
 
-# our target length (we'll make it a magic constant, rather than a magic number
-TARGET_LENGTH = 42 # this is how many notes are in "Twinkle, Twinkle, Little Star
+# our target length (we'll make it a magic constant, rather than a magic number)
+TARGET_LENGTH = 42 # this is how many notes are in "Twinkle, Twinkle, Little Star"
 
 # this is our target pitch total
 TARGET_TOTAL = 2710 # confirmed multiple times

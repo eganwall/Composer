@@ -11,6 +11,9 @@
 # this is going to help us choose our crossover point
 import random
 
+# our C major key for use in our mutation function
+cMajorKey = [60, 62, 64, 65, 67, 69, 71, 72, 74, 76, 77, 79, 81, 83, 84]
+
 # first we'll pass it the two parents
 p1 = raw_input("Parent 1: ")
 p2 = raw_input("Parent 2: ")
@@ -18,7 +21,7 @@ p2 = raw_input("Parent 2: ")
 # this is our target length for the piece
 LENGTH = 48.0
 
-# first we'll bring in the two parents of the new generation
+# we'll bring in the two parents of the new generation
 parent1 = open('music' + p1 + '.dna', 'r').read()
 parent2 = open('music' + p2 + '.dna', 'r').read()
 
@@ -82,28 +85,41 @@ while(m < 20):
 	print("The total duration of piece %d is %.1f before cleanup." % (m, totalDuration))
 
 	noteDurations = list()
+	notePitches = list()
 	
-	if totalDuration != LENGTH:
-		# keep a list of all of the values of all of the genes
-		
-		# and another list of the pitches, so at the end we can just splice them together
-		# (there may be a better way to do this, but I'll leave that for another day.)
-		notePitches = list()
-		
-		# now we loop through and populate our lists
-		for index, gene in enumerate(newGen):
-			currGene = newGen[index]
+	# now we loop through and populate our lists
+	for index, gene in enumerate(newGen):
+		currGene = newGen[index]
 			
-			notePitches.append(currGene[0:2]) # this will copy the pitch value into our first list
-			
-			# this little block copies our time value into the second list
-			if currGene[2:4] == "05":
-				noteDurations.append(5)
-			else:
-				noteDurations.append(int(currGene[2:4]))
-			print(currGene[2:4])
-		print noteDurations
-		print notePitches
+		notePitches.append(currGene[0:2]) # this will copy the pitch value into our first list
+		
+		# this little block copies our time value into the second list
+		if currGene[2:4] == "05":
+			noteDurations.append(5)
+		else:
+			noteDurations.append(int(currGene[2:4]))
+		print(currGene[2:4])
+	print noteDurations
+	print notePitches
+	
+	''' Here we'll add a small mutation function. The mutation rate
+	will be experimented with, but for now we'll simply make it alter 
+	a single pitch '''
+	mutationRoll = random.random()
+	
+	if mutationRoll <= .5: # lol
+		# and so we find a random index
+		rand = random.randrange(0, len(notePitches))
+		
+		# debugging code
+		x = notePitches[rand]
+		
+		# here we actually swap the index for a new pitch
+		notePitches[rand] = cMajorKey[random.randrange(0, len(cMajorKey))]
+		
+		print("******* Note at index %d changed from %s to %s *******" % (rand, x, notePitches[rand]))
+	else:
+		print("No mutation occurred.")
 	
 	if noteDurations is not None: # lol
 		'''
@@ -154,6 +170,6 @@ while(m < 20):
 	# now we write our Adam into our new DNA file to start the new generation
 	for gene in newGen:
 		outFile.write(gene + "|")
-		print("Writing gene " + gene + " into piece" + str(m))
+		print("Writing gene " + gene + " into piece " + str(m))
 		
 print("All done!")
