@@ -7,6 +7,26 @@
 '''
 import random
 
+# LAWL @ this being the first actual function I've written in this program. 
+# I should probably stop being such a joke
+def templatePitches():
+	# initialize the pitch list
+	pitches = list()
+	
+	# and now we open our file and read it in
+	inFile = "template.dna"
+	input = open(inFile, "r").read()
+	
+	# standard cleanup stuff
+	template = input.split('|')
+	template.remove('')
+	
+	# this loop will populate our template list
+	for index, gene in enumerate(template):
+		pitches.append(int(gene[0:2]))
+		
+	return pitches
+
 # our population counter
 m = 0
 
@@ -18,6 +38,13 @@ TARGET_TOTAL = 2710 # confirmed multiple times
 
 # our list of fitnesses
 fitnesses = list()
+
+''' Here is where we initialize our list of pitches
+that we're going to compare each test pitch against. '''
+targetPitches = templatePitches()
+
+# debug stuff
+print targetPitches
 
 # here's the loop where we read in all of the organisms and evaluate them
 while(m < 20):
@@ -34,7 +61,7 @@ while(m < 20):
 	# now we'll read in the genetic material
 	input = open(fileName, 'r').read()
 	
-	# do all the basic cleanup shit, you know homey
+	# do all the basic cleanup shit, you know what it is homey
 	genes = input.split('|') 
 	genes.remove('')
 	
@@ -88,6 +115,8 @@ print finalistPieces
 print finalistFits
 
 # select the two winners
+
+# TODO: Figure out a better way to do this and REFACTOR
 if(finalistFits[0] <= finalistFits[1]):
 	finalist1Fit = finalistFits[0]
 	finalist1 = finalistPieces[0]
