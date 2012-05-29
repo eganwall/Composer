@@ -7,8 +7,8 @@
 '''
 import random
 
-# LAWL @ this being the first actual function I've written in this program. 
-# I should probably stop being such a joke
+''' LAWL @ this being the first actual function I've written in this program. 
+I should probably stop being such a joke '''
 def templatePitches():
 	# initialize the pitch list
 	pitches = list()
@@ -27,6 +27,28 @@ def templatePitches():
 		
 	return pitches
 
+''' This function will accept two lists as arguments - 
+the current organism's pitches and the target 
+piece's pitches. It will then calculate the difference 
+between the two pieces and obtain an average offset by note, 
+which it will then return to be appended to the fitness list. '''
+	
+def calcFitness(currNotes, targetNotes):
+	noteSum = 0 # the sum of our pitch differences
+	
+	# loop through the lists and get the difference
+	for index, note in enumerate(currNotes):
+		# get the difference
+		difference = abs(targetNotes[index] - currNotes[index])
+		
+		noteSum += difference
+
+	# now we simply obtain an average difference per note
+	fitness = float(difference / 42)
+	
+	# and return it!
+	return fitness
+	
 # our population counter
 m = 0
 
@@ -53,7 +75,7 @@ while(m < 20):
 	fitnesses.append(0)
 	
 	# then we increment our counter
-	m = m + 1
+	m += 1
 	
 	# our filename
 	fileName = 'music' + str(m) + '.dna'
@@ -108,7 +130,7 @@ while(i < 4):
 		finalistPieces.append(finalist)
 		
 		# and we can increment our counter
-		i = i + 1
+		i += 1
 	
 print("The four finalists are:")
 print finalistPieces
