@@ -33,13 +33,13 @@ piece's pitches. It will then calculate the difference
 between the two pieces and obtain an average offset by note, 
 which it will then return to be appended to the fitness list. '''
 	
-def calcFitness(currNotes, targetNotes):
+def avgDifference(currNotes, targetNotes):
 	noteSum = 0 # the sum of our pitch differences
 	
 	# loop through the lists and get the difference
 	for index, note in enumerate(currNotes):
 		# get the difference
-		difference = abs(targetNotes[index] - currNotes[index])
+		difference = abs(targetNotes[index] - int(currNotes[index]))
 		
 		noteSum += difference
 
@@ -48,7 +48,24 @@ def calcFitness(currNotes, targetNotes):
 	
 	# and return it!
 	return fitness
+
+''' This is the early-stage fitness function. It will
+optimize pieces to be the correct length, and at that
+point the next function will take over optimization. '''
 	
+def timeDiff(genes):
+	return abs(len(genes) - TARGET_LENGTH)
+	
+''' This is the early-stage mutation function. It will 
+prevent a fitness plateau in early generations that are
+being size-optimized by randomly adding a note to the end
+of the piece. It's a good thing we're not listening to any
+of these pieces, because it would sound weird as all sorts 
+of balls '''
+
+def mutation1()	
+	
+
 # our population counter
 m = 0
 
@@ -93,21 +110,11 @@ while(m < 20):
 	# first, we'll assign a few fitness points based on 
 	# the number of notes in the organism vs. the number in the goal
 	if(len(genes) != TARGET_LENGTH):
-		fitnesses[m - 1] += abs(len(genes) - TARGET_LENGTH)
-	print("Length of piece %d is %d, fitness is %d." % (m, len(genes), fitnesses[m - 1]))
-
-	# our second step is to tally up the total sum of the 
-	# pitches in the piece and compare it against the target
-	totalPitches = 0
-	
-	for index, gene in enumerate(genes):
-		currGene = genes[index]
-		# increment our counter by the current note's pitch value
-		totalPitches += int(currGene[0:2])
-	
-	if(totalPitches != TARGET_TOTAL):
-		fitnesses[m - 1] += abs(totalPitches - TARGET_TOTAL)
-	print("The pitch total of piece %d is %d, fitness is %d." % (m, totalPitches, fitnesses[m - 1]))
+		fitnesses[m - 1] = timeDiff(genes)
+		print("Length of piece %d is %d, fitness is %d." % (m, len(genes), fitnesses[m - 1]))
+	else:
+		fitnesses[m - 1] = avgDifference(genes, targetPitches)
+		print("Piece %d: Average difference per note is %d" % (m, fitnesses[m - 1]))
 	
 	''' INSERT MORE FITNESS CALCULATIONS HERE WHEN YOU THINK OF THEM '''
 	
@@ -138,7 +145,7 @@ print finalistFits
 
 # select the two winners
 
-# TODO: Figure out a better way to do this and REFACTOR
+# TODO: Figure out a better way to do this and REFACTORRRRRR
 if(finalistFits[0] <= finalistFits[1]):
 	finalist1Fit = finalistFits[0]
 	finalist1 = finalistPieces[0]
