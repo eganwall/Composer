@@ -63,8 +63,10 @@ of the piece. It's a good thing we're not listening to any
 of these pieces, because it would sound weird as all sorts 
 of balls '''
 
-def mutation1()	
-	
+def mutation1():
+
+	# I'll finish this later
+		
 
 # our population counter
 m = 0
