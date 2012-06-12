@@ -1,4 +1,7 @@
-COMPOSER
-===============
+Running fileOut.py will generate an initial population of 20 random .dna files that each contain the genetic material for a sequence of notes. 
 
-Running fileOut.py will generate a random .in file that contains the genetic material for a sequence of notes. fileIn.py will use that file as input and create the .mid file, which then can be listened to. The crossover.py module will open two parent DNA files, determine a crossover point, combine the files around that point, and write the new offspring to its own DNA file. If the resulting organism is not of the same length as the parents, a mutation/correction function will randomly modify chromosomes until the offspring fits the length specification.
+fileIn.py will use that population of files as input and create a corresponding .mid file for each organism, which then can be listened to. 
+
+fitness.py will then assess each organism's fitness level according to a set of criteria, and then the selection function will use a modified tournament selection algorithm in order to determine the parents of the new generation.
+
+The crossover.py module will open the two parent DNA files, determine a crossover point, combine the files around that point, and write the new offspring to its own new DNA file for each organism in the new population. If a new organism is not of the correct length, the crossover module will clean it up. The mutation function is also in this module, and each given organism has a 50% chance of having a single note's pitch altered.
