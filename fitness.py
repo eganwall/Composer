@@ -34,10 +34,15 @@ between the two pieces and obtain an average offset by note,
 which it will then return to be appended to the fitness list. '''
 	
 def avgDifference(currNotes, targetNotes):
+	if len(currNotes) < len(targetNotes):
+		littleList = currNotes
+	else:
+		littleList = targetNotes
+	
 	noteSum = 0 # the sum of our pitch differences
 	
 	# loop through the lists and get the difference
-	for index, note in enumerate(currNotes):
+	for index, note in enumerate(littleList):
 		# get the difference
 		difference = abs(targetNotes[index] - int(currNotes[index]))
 		
@@ -66,7 +71,7 @@ of balls '''
 def mutation1():
 
 	# I'll finish this later
-		
+	return 	
 
 # our population counter
 m = 0
@@ -112,11 +117,10 @@ while(m < 20):
 	# first, we'll assign a few fitness points based on 
 	# the number of notes in the organism vs. the number in the goal
 	if(len(genes) != TARGET_LENGTH):
-		fitnesses[m - 1] = timeDiff(genes)
+		fitnesses[m - 1] += timeDiff(genes)
 		print("Length of piece %d is %d, fitness is %d." % (m, len(genes), fitnesses[m - 1]))
-	else:
-		fitnesses[m - 1] = avgDifference(genes, targetPitches)
-		print("Piece %d: Average difference per note is %d" % (m, fitnesses[m - 1]))
+	fitnesses[m - 1] += int(avgDifference(genes, targetPitches))
+	print("Piece %d: Average difference per note is %d" % (m, fitnesses[m - 1]))
 	
 	''' INSERT MORE FITNESS CALCULATIONS HERE WHEN YOU THINK OF THEM '''
 	
