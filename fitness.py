@@ -34,6 +34,8 @@ between the two pieces and obtain an average offset by note,
 which it will then return to be appended to the fitness list. '''
 	
 def avgDifference(currNotes, targetNotes):
+	
+	# first determine how far into the lists we're comparing
 	if len(currNotes) < len(targetNotes):
 		littleList = currNotes
 	else:
@@ -61,17 +63,6 @@ point the next function will take over optimization. '''
 def timeDiff(genes):
 	return abs(len(genes) - TARGET_LENGTH)
 	
-''' This is the early-stage mutation function. It will 
-prevent a fitness plateau in early generations that are
-being size-optimized by randomly adding a note to the end
-of the piece. It's a good thing we're not listening to any
-of these pieces, because it would sound weird as all sorts 
-of balls '''
-
-def mutation1():
-
-	# I'll finish this later
-	return 	
 
 # our population counter
 m = 0

@@ -14,6 +14,32 @@ import random
 # our C major key for use in our mutation function
 cMajorKey = [60, 62, 64, 65, 67, 69, 71, 72, 74, 76, 77, 79, 81, 83, 84]
 
+''' This is the early-stage mutation function. It will 
+prevent a fitness plateau in early generations that are
+being size-optimized by randomly adding a note to the end
+of the piece. It's a good thing we're not listening to any
+of these pieces, because it would sound weird as all sorts 
+of balls '''
+
+def mutation1():
+	mutationRoll = random.random()
+	
+	if mutationRoll <= .5: # lol
+		# and so we find a random index
+		rand = random.randrange(0, len(notePitches))
+		
+		# debugging code
+		x = notePitches[rand]
+		
+		# here we actually swap the index for a new pitch
+		notePitches[rand] = cMajorKey[random.randrange(0, len(cMajorKey))]
+		
+		print("******* Note at index %d changed from %s to %s *******" % (rand, x, notePitches[rand]))
+		return 1
+	else:
+		print("No mutation occurred.")
+		return 0
+
 # first we'll pass it the two parents
 p1 = raw_input("Parent 1: ")
 p2 = raw_input("Parent 2: ")
@@ -102,24 +128,8 @@ while(m < 20):
 	print noteDurations
 	print notePitches
 	
-	''' Here we'll add a small mutation function. The mutation rate
-	will be experimented with, but for now we'll simply make it alter 
-	a single pitch '''
-	mutationRoll = random.random()
-	
-	if mutationRoll <= .5: # lol
-		# and so we find a random index
-		rand = random.randrange(0, len(notePitches))
-		
-		# debugging code
-		x = notePitches[rand]
-		
-		# here we actually swap the index for a new pitch
-		notePitches[rand] = cMajorKey[random.randrange(0, len(cMajorKey))]
-		
-		print("******* Note at index %d changed from %s to %s *******" % (rand, x, notePitches[rand]))
-	else:
-		print("No mutation occurred.")
+	# mutate it
+	mutationOccurred = mutation1()
 	
 	if noteDurations is not None: # lol
 		'''
